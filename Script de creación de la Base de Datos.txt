@@ -1,0 +1,43 @@
+/*Versión 1.0 - 17-02-2023*/
+/*CREATE DATABASE bd_study_app;*/
+
+create table users (id serial primary key,
+name varchar,
+last_name varchar,
+avatar varchar,
+email varchar,
+"password" varchar,
+deleted boolean);
+
+create table themes (id serial primary key,
+create_date timestamp without time zone,
+name varchar,
+description varchar,
+keywords varchar,
+avatar varchar,
+owner_user_id integer);
+
+alter table themes add foreign key (owner_user_id) references users (id);
+
+create table topics(id serial primary key,
+create_date timestamp without time zone,
+name varchar,
+topic_id integer,
+"order" integer,
+priority integer,
+user_id integer,
+color varchar,
+owner_user_id integer);
+
+alter table topics add foreign key (topic_id) references topics (id);
+
+alter table topics add foreign key (owner_user_id) references users (id);
+
+create table themes_properties (id serial primary key,
+theme_id integer,
+property_name varchar,
+property_value varchar);
+
+
+alter table themes_properties add foreign key (theme_id)
+references themes(id); 
